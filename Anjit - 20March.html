@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjit Kumar — M&A Advisor, Finance Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage:#8fad88; --sage-light:#c8dbc5; --sage-pale:#eef4ed; --sage-deep:#5a7d56;
+  --warm-white:#faf9f6; --charcoal:#2a2a2a; --mid-grey:#666; --light-grey:#e5e5e5;
+  --accent:#c4813d; --accent-light:#f5e6d3;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--charcoal);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:300;
+  padding:1.2rem 5rem;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(250,249,246,0.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(143,173,136,0.18);transition:box-shadow 0.3s;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--sage-deep);letter-spacing:0.03em;text-decoration:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;color:var(--mid-grey);font-size:0.78rem;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;transition:color 0.2s;white-space:nowrap;}
+.nav-links a:hover{color:var(--sage-deep);}
+.nav-cta{background:var(--sage-deep)!important;color:white!important;padding:0.48rem 1.1rem;border-radius:50px;transition:background 0.2s!important;}
+.nav-cta:hover{background:var(--charcoal)!important;}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--charcoal);border-radius:2px;transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--warm-white);z-index:250;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--charcoal);text-decoration:none;}
+.mobile-menu a:hover{color:var(--sage-deep);}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--charcoal);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--sage-pale);display:grid;grid-template-columns:1.1fr 1fr;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:-15%;right:-8%;width:52vw;height:52vw;border-radius:50%;background:radial-gradient(circle,rgba(143,173,136,0.15) 0%,transparent 68%);pointer-events:none;}
+.hero-text{display:flex;flex-direction:column;justify-content:center;padding:9rem 4rem 6rem 6rem;position:relative;z-index:2;}
+.hero-tag{font-size:0.7rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:1.6rem;display:flex;align-items:center;gap:0.8rem;opacity:0;animation:fadeUp 0.8s 0.2s ease forwards;}
+.hero-tag::before{content:'';display:block;width:2rem;height:1px;background:var(--sage-deep);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.4vw,3.2rem);line-height:1.22;color:var(--charcoal);margin-bottom:1.4rem;font-weight:600;opacity:0;animation:fadeUp 0.8s 0.35s ease forwards;}
+.hero h1 em{font-style:italic;color:var(--sage-deep);}
+.hero-subline{font-size:0.98rem;line-height:1.8;color:var(--mid-grey);max-width:480px;margin-bottom:1.4rem;font-weight:300;opacity:0;animation:fadeUp 0.8s 0.5s ease forwards;}
+.hero-creds{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s 0.58s ease forwards;}
+.cred-badge{background:white;border:1px solid var(--sage-light);border-radius:50px;padding:0.35rem 0.9rem;font-size:0.75rem;font-weight:500;color:var(--sage-deep);}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.65s ease forwards;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--sage-deep);color:white;padding:0.85rem 1.8rem;border-radius:50px;text-decoration:none;font-size:0.88rem;font-weight:500;letter-spacing:0.04em;transition:all 0.25s;}
+.btn-primary:hover{background:var(--charcoal);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--charcoal);padding:0.85rem 1.8rem;border-radius:50px;text-decoration:none;font-size:0.88rem;font-weight:500;letter-spacing:0.04em;border:1.5px solid var(--light-grey);transition:all 0.25s;}
+.btn-secondary:hover{border-color:var(--sage-deep);color:var(--sage-deep);}
+.hero-visual{display:flex;align-items:center;justify-content:center;padding:6rem 4rem;position:relative;z-index:2;opacity:0;animation:fadeUp 0.8s 0.5s ease forwards;}
+.hero-card-stack{position:relative;width:300px;height:360px;}
+.hero-card{position:absolute;border-radius:18px;padding:1.8rem;}
+.hc1{background:white;width:265px;height:145px;top:0;left:18px;box-shadow:0 8px 32px rgba(0,0,0,0.07);transform:rotate(-3deg);display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.3s;}
+.hc1:hover{transform:rotate(-1deg) scale(1.02);}
+.hc2{background:var(--sage-deep);color:white;width:248px;height:140px;bottom:20px;right:0;box-shadow:0 8px 32px rgba(90,125,86,0.3);transform:rotate(2deg);display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.3s;}
+.hc2:hover{transform:rotate(0.5deg) scale(1.02);}
+.hc3{background:var(--accent-light);width:210px;height:125px;top:108px;left:55px;box-shadow:0 8px 32px rgba(0,0,0,0.06);transform:rotate(1deg);display:flex;align-items:center;justify-content:center;text-align:center;}
+.card-label{font-size:0.62rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;opacity:0.6;}
+.card-value{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;}
+.hc2 .card-label{opacity:0.7;}
+
+/* ── SHARED ── */
+section{padding:7rem 6rem;}
+.section-eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:0.4rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.6vw,2.5rem);line-height:1.22;color:var(--charcoal);margin-bottom:3rem;}
+
+/* ── JOURNEY ── */
+.journey{background:var(--sage-pale);}
+.journey-inner{max-width:1100px;}
+/* Career timeline */
+.timeline{position:relative;margin-bottom:3.5rem;}
+.timeline::before{content:'';position:absolute;left:28px;top:8px;bottom:8px;width:2px;background:var(--sage-light);}
+.tl-item{display:grid;grid-template-columns:56px 1fr;gap:1.2rem;margin-bottom:2rem;position:relative;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--sage-deep);border:3px solid white;box-shadow:0 0 0 2px var(--sage-light);margin-top:6px;justify-self:center;flex-shrink:0;}
+.tl-card{background:white;border-radius:14px;padding:1.6rem 1.8rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.tl-meta{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.4rem;}
+.tl-company{font-weight:500;font-size:0.92rem;color:var(--charcoal);}
+.tl-loc{font-size:0.75rem;color:var(--mid-grey);}
+.tl-date{font-size:0.72rem;font-weight:500;color:var(--sage-deep);background:var(--sage-pale);padding:0.18rem 0.6rem;border-radius:50px;margin-left:auto;}
+.tl-role{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--charcoal);margin-bottom:0.5rem;}
+.tl-desc{font-size:0.88rem;line-height:1.75;color:var(--mid-grey);font-weight:300;}
+/* Map */
+.map-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--sage-light);margin-bottom:2.5rem;background:#dcebd9;}
+.map-wrap svg{width:100%;height:auto;display:block;}
+.travel-strip{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.travel-pill{background:white;border:1px solid var(--sage-light);border-radius:50px;padding:0.42rem 1rem;font-size:0.78rem;color:var(--sage-deep);font-weight:500;}
+
+/* ── IMPACT ── */
+.impact{background:var(--charcoal);}
+.impact .section-eyebrow{color:var(--sage-light);}
+.impact .section-title{color:white;}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1100px;}
+.impact-card{border-radius:16px;padding:2.6rem;}
+.impact-card.wins{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
+.impact-card.forward{background:var(--sage-deep);}
+.impact-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:0.8rem;color:white;}
+.impact-card p{font-size:0.91rem;line-height:1.8;color:rgba(255,255,255,0.58);font-weight:300;margin-bottom:1.2rem;}
+.impact-card.forward p{color:rgba(255,255,255,0.82);}
+.win-item{display:flex;align-items:flex-start;gap:0.8rem;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+.win-item:last-child{border-bottom:none;}
+.win-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--sage-light);min-width:60px;line-height:1.1;}
+.win-text{font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.5;padding-top:0.15rem;}
+.badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.12);border-radius:50px;padding:0.28rem 0.75rem;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage-light);margin-bottom:1rem;}
+.fwd-list{list-style:none;margin-top:0.5rem;}
+.fwd-list li{font-size:0.86rem;color:rgba(255,255,255,0.75);padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:flex-start;gap:0.7rem;}
+.fwd-list li:last-child{border-bottom:none;}
+.fwd-list li::before{content:'→';color:rgba(255,255,255,0.4);flex-shrink:0;}
+
+/* ── SIMPLIFIED (FINTECH) ── */
+.simplified{background:white;}
+.simplified-inner{max-width:1100px;}
+.simplified-header{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;margin-bottom:3.5rem;}
+.simplified-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent-light);border-radius:50px;padding:0.35rem 0.9rem;font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.simplified h3{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.4vw,2.1rem);line-height:1.25;margin-bottom:1rem;color:var(--charcoal);}
+.simplified h3 em{font-style:italic;color:var(--accent);}
+.simplified-desc{font-size:0.93rem;line-height:1.8;color:var(--mid-grey);font-weight:300;}
+.simplified-market{background:var(--sage-pale);border-radius:14px;padding:1.8rem;}
+.simplified-market .market-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:600;color:var(--sage-deep);}
+.simplified-market .market-label{font-size:0.78rem;color:var(--mid-grey);margin-top:0.2rem;}
+.simplified-market .market-note{font-size:0.82rem;color:var(--mid-grey);margin-top:0.8rem;line-height:1.6;font-weight:300;border-top:1px solid var(--sage-light);padding-top:0.8rem;}
+.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.arch-card{border-radius:14px;padding:1.8rem;border:1px solid var(--sage-light);transition:transform 0.2s,box-shadow 0.2s;}
+.arch-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.07);}
+.arch-card.frontend{background:var(--sage-pale);}
+.arch-card.middle{background:var(--charcoal);}
+.arch-card.backend{background:var(--accent-light);border-color:rgba(196,129,61,0.2);}
+.arch-icon{font-size:1.6rem;margin-bottom:1rem;display:block;}
+.arch-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:0.6rem;color:var(--charcoal);}
+.arch-card.middle h4{color:white;}
+.arch-card p{font-size:0.82rem;line-height:1.7;color:var(--mid-grey);font-weight:300;}
+.arch-card.middle p{color:rgba(255,255,255,0.58);}
+.arch-card.backend p{color:rgba(42,42,42,0.65);}
+.arch-features{margin-top:0.8rem;display:flex;flex-direction:column;gap:0.3rem;}
+.arch-feat{font-size:0.77rem;color:var(--sage-deep);display:flex;align-items:center;gap:0.4rem;}
+.arch-card.middle .arch-feat{color:var(--sage-light);}
+.arch-card.backend .arch-feat{color:var(--accent);}
+.arch-feat::before{content:'·';font-size:1rem;line-height:0;}
+
+/* ── SKILLS ── */
+.skills{background:var(--sage-pale);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;}
+.skill-group{background:white;border-radius:16px;padding:2rem;}
+.skill-group h4{font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:1.1rem;}
+.skill-tag{display:inline-block;background:var(--sage-pale);border:1px solid var(--sage-light);border-radius:6px;padding:0.32rem 0.7rem;font-size:0.79rem;color:var(--charcoal);margin:0.2rem 0.2rem 0 0;}
+
+/* ── OFF THE DESK ── */
+.desk{background:white;}
+.desk-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;max-width:1100px;}
+.desk-card{border-radius:20px;padding:2.8rem;}
+.desk-card.cooking{background:var(--sage-pale);border:1px solid var(--sage-light);}
+.desk-card.music{background:var(--charcoal);display:flex;flex-direction:column;justify-content:space-between;}
+.desk-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:0.85rem;margin-top:0.5rem;}
+.desk-card.music h3{color:white;}
+.desk-card p{font-size:0.91rem;line-height:1.8;color:var(--mid-grey);font-weight:300;}
+.desk-card.music p{color:rgba(255,255,255,0.56);}
+.dish-tag{display:inline-block;background:white;color:var(--accent);font-size:0.72rem;font-weight:500;padding:0.26rem 0.72rem;border-radius:50px;margin-right:0.4rem;margin-top:0.9rem;border:1px solid rgba(196,129,61,0.3);}
+.music-visual{margin-top:2rem;display:flex;gap:0.4rem;align-items:flex-end;height:52px;}
+.bar{flex:1;background:rgba(143,173,136,0.5);border-radius:3px;animation:wave 1.4s ease-in-out infinite;}
+.bar:nth-child(2){animation-delay:.2s}.bar:nth-child(3){animation-delay:.4s}.bar:nth-child(4){animation-delay:.1s}.bar:nth-child(5){animation-delay:.5s}.bar:nth-child(6){animation-delay:.3s}.bar:nth-child(7){animation-delay:.6s}.bar:nth-child(8){animation-delay:.15s}
+@keyframes wave{0%,100%{height:20%}50%{height:88%}}
+
+/* ── PUSHING LIMITS ── */
+.limits{background:var(--sage-pale);}
+.limits-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1100px;}
+.limit-card{border-radius:18px;padding:2.6rem;}
+.limit-card.physical{background:white;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.limit-card.mental{background:var(--charcoal);}
+.limit-icon{font-size:1.9rem;margin-bottom:1.3rem;display:block;}
+.limit-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.85rem;}
+.limit-card.mental h3{color:white;}
+.limit-card p{font-size:0.91rem;line-height:1.78;color:var(--mid-grey);font-weight:300;}
+.limit-card.mental p{color:rgba(255,255,255,0.58);}
+.limit-stat{margin-top:1.6rem;display:flex;gap:2rem;}
+.stat-num{display:block;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--sage-deep);}
+.stat-label{font-size:0.66rem;color:var(--mid-grey);letter-spacing:0.1em;text-transform:uppercase;}
+.mental-stat .stat-num{color:var(--sage-light);}
+.mental-stat .stat-label{color:rgba(255,255,255,0.4);}
+
+/* ── CONTACT ── */
+.contact{background:var(--charcoal);}
+.contact .section-eyebrow{color:var(--sage-light);}
+.contact .section-title{color:white;}
+.contact-inner{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-left p{font-size:0.93rem;line-height:1.8;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:2rem;}
+.contact-links{display:flex;flex-direction:column;gap:0.85rem;}
+.contact-link{display:flex;align-items:center;gap:0.85rem;text-decoration:none;color:rgba(255,255,255,0.8);font-size:0.88rem;padding:0.75rem 1.1rem;background:rgba(255,255,255,0.06);border-radius:10px;border:1px solid rgba(255,255,255,0.1);transition:all 0.2s;}
+.contact-link:hover{background:rgba(255,255,255,0.1);border-color:var(--sage-light);transform:translateX(4px);}
+.contact-form-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:2.4rem;}
+.contact-form-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:white;margin-bottom:1.4rem;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.4rem;}
+.form-group input,.form-group textarea{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:0.72rem 0.95rem;color:white;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--sage-light);}
+.form-group textarea{resize:vertical;min-height:95px;}
+.form-submit{width:100%;background:var(--sage-deep);color:white;border:none;padding:0.88rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;transition:background 0.2s;letter-spacing:0.04em;}
+.form-submit:hover{background:var(--sage);}
+
+/* ── FOOTER ── */
+footer{background:var(--charcoal);border-top:1px solid rgba(255,255,255,0.07);padding:2.8rem 6rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-name{font-family:'Playfair Display',serif;color:white;font-size:1.05rem;}
+.footer-tagline{font-size:0.76rem;color:rgba(255,255,255,0.3);margin-top:0.25rem;}
+.footer-links{display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:flex-end;}
+.footer-links a{text-decoration:none;font-size:0.75rem;color:rgba(255,255,255,0.36);letter-spacing:0.09em;text-transform:uppercase;transition:color 0.2s;}
+.footer-links a:hover{color:var(--sage-light);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:1.1rem 2.5rem;}
+  section{padding:5.5rem 3rem;}
+  .hero-text{padding:8rem 2.5rem 4rem 3rem;}
+  .hero-visual{padding:4rem 2.5rem;}
+  .simplified-header{grid-template-columns:1fr;gap:2rem;}
+  .arch-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  section{padding:5rem 1.5rem;}
+  .hero{grid-template-columns:1fr;}
+  .hero-text{padding:7.5rem 1.5rem 3rem;}
+  .hero-visual{display:none;}
+  .limits-grid,.desk-grid,.impact-grid,.skills-grid,.contact-inner{grid-template-columns:1fr;}
+  .arch-grid{grid-template-columns:1fr;}
+  .simplified-header{grid-template-columns:1fr;}
+  .timeline::before{left:18px;}
+  .tl-item{grid-template-columns:38px 1fr;}
+  .tl-date{margin-left:0;width:fit-content;}
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2.5rem 1.5rem;}
+  .footer-links{justify-content:center;}
+  .journey-cards-grid{grid-template-columns:1fr!important;}
+  .journey-connector-v{display:none!important;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.9rem;}
+  .hero-creds{gap:0.4rem;}
+  .cred-badge{font-size:0.7rem;}
+  .btn-primary,.btn-secondary{padding:0.75rem 1.4rem;font-size:0.83rem;}
+  .impact-grid{grid-template-columns:1fr;}
+  .tl-card{padding:1.2rem 1.3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#top">Anjit Kumar</a>
+  <ul class="nav-links">
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#impact">Work</a></li>
+    <li><a href="#simplified">Simplified</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#desk">Life</a></li>
+    <li><a href="#contact" class="nav-cta">Say hello</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#journey" onclick="closeMobile()">Journey</a>
+  <a href="#impact" onclick="closeMobile()">Work</a>
+  <a href="#simplified" onclick="closeMobile()">Simplified</a>
+  <a href="#skills" onclick="closeMobile()">Skills</a>
+  <a href="#desk" onclick="closeMobile()">Life</a>
+  <a href="#contact" onclick="closeMobile()">Say hello</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <p class="hero-tag">M&amp;A Advisor · Finance Strategist · Builder</p>
+    <h1>Hi, I'm Anjit.<br>I believe in <em>continuous growth</em>,<br>deep connections, and leaving<br>things better than I found them.</h1>
+    <p class="hero-subline">6+ years advising C-suite executives on investment decisions across cross-border M&A and transaction advisory. Currently building <em style="font-style:italic;color:var(--accent)">Simplified</em> — an AI-powered analyst platform — while completing my Master of Finance at Rotman.</p>
+    <div class="hero-creds">
+      <span class="cred-badge">CA (ICAI)</span>
+      <span class="cred-badge">CFA Level III</span>
+      <span class="cred-badge">MFin @ Rotman</span>
+      <span class="cred-badge">Toronto 🍁</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#impact" class="btn-primary">See my work ↓</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="hero-card hc1">
+        <span class="card-label">Currently training for</span>
+        <span class="card-value">May Marathon 🏃</span>
+      </div>
+      <div class="hero-card hc2">
+        <span class="card-label">Based in</span>
+        <span class="card-value">Toronto 🍁</span>
+      </div>
+      <div class="hero-card hc3">
+        <div style="font-size:.92rem;color:var(--accent);font-weight:500;font-family:'Playfair Display',serif;font-style:italic;">"Leave it better than you found it."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MY JOURNEY ── -->
+<section class="journey" id="journey">
+  <div class="journey-inner">
+    <div class="fade-in">
+      <p class="section-eyebrow">Section 01</p>
+      <h2 class="section-title">My Journey</h2>
+    </div>
+
+    <!-- Career Timeline -->
+    <div class="timeline fade-in">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <span class="tl-company">Triton Advisory Services</span>
+            <span class="tl-loc">· Toronto, Canada</span>
+            <span class="tl-date">2021 – Present</span>
+          </div>
+          <div class="tl-role">Senior Associate — Transaction Advisory</div>
+          <p class="tl-desc">Led financial workstreams on cross-border M&A deals, owned end-to-end valuation models and IC materials for C-suite decision making. Executed target screening and mentored junior team members.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <span class="tl-company">Ardent Advisory & Accounting</span>
+            <span class="tl-loc">· Dubai, UAE</span>
+            <span class="tl-date">2018 – 2021</span>
+          </div>
+          <div class="tl-role">Senior Consultant — Transaction Advisory</div>
+          <p class="tl-desc">Delivered buy-side diligence across 5+ mandates; prepared investment memos for 10+ deals (avg. EV $100M+). Managed valuation and post-deal support including PPA and carve-out analysis.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <span class="tl-company">Crowe</span>
+            <span class="tl-loc">· Dubai, UAE</span>
+            <span class="tl-date">2016 – 2018</span>
+          </div>
+          <div class="tl-role">Analyst — Corporate Finance</div>
+          <p class="tl-desc">Developed feasibility and investment case reports through financial forecasting and market analysis. Led client interactions and built templates to translate complex data into clear decision support.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent);box-shadow:0 0 0 2px rgba(196,129,61,0.3);"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <span class="tl-company">EY &amp; SDU</span>
+            <span class="tl-loc">· Bangalore, India</span>
+            <span class="tl-date">2012 – 2016</span>
+          </div>
+          <div class="tl-role">Consultant / Intern</div>
+          <p class="tl-desc">Managed cross-border advisory for California-based clients with senior-level reviews. Developed process-improvement insights for a Fortune 500 IT client.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-wrap fade-in">
+      <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(180deg,#c2dff0 0%,#d5ecf7 55%,#c0d9e6 100%)">
+        <path d="M70,55 L132,46 L187,50 L222,70 L242,100 L246,136 L236,172 L218,202 L200,232 L188,262 L170,276 L154,266 L136,244 L116,224 L98,196 L80,166 L66,132 L58,96 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M185,262 L198,288 L208,318 L213,348 L208,382 L196,410 L183,418 L170,406 L160,380 L156,346 L158,312 L166,282 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M193,22 L238,15 L263,30 L266,52 L252,67 L226,72 L205,58 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M432,55 L476,49 L508,57 L528,75 L526,97 L510,112 L488,117 L460,110 L438,95 L430,75 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M448,128 L514,116 L546,132 L560,162 L562,202 L555,248 L542,296 L525,336 L505,356 L485,358 L465,346 L447,314 L437,272 L430,232 L428,192 L432,158 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M528,115 L586,109 L610,127 L615,155 L597,172 L570,177 L545,165 L530,145 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M488,25 L628,15 L738,25 L788,45 L798,70 L768,85 L718,87 L658,77 L598,69 L538,65 L492,59 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M597,125 L655,115 L686,134 L692,172 L680,209 L658,229 L636,225 L615,202 L603,172 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M698,132 L758,122 L790,142 L788,172 L760,185 L728,179 L703,162 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M692,62 L798,52 L843,72 L855,105 L835,129 L792,135 L745,125 L708,105 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <path d="M745,292 L828,279 L869,299 L879,345 L865,386 L836,406 L802,411 L768,396 L745,368 L734,334 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="1"/>
+        <!-- India subcontinent outline -->
+        <path d="M458,42 L488,36 L506,50 L502,55 L478,50 Z" fill="#c0d9b5" stroke="#a8c89e" stroke-width="0.8"/>
+
+        <!-- Flight arc: Dubai → Toronto -->
+        <path d="M 588,145 Q 475,28 173,142" fill="none" stroke="#5a7d56" stroke-width="2.2" stroke-dasharray="9,6" opacity="0.72"/>
+        <polygon points="173,142 185,130 182,147" fill="#5a7d56" opacity="0.85"/>
+        <!-- Flight arc: Bangalore → Dubai (faint) -->
+        <path d="M 545,210 Q 568,175 588,145" fill="none" stroke="#c4813d" stroke-width="1.5" stroke-dasharray="6,5" opacity="0.5"/>
+
+        <!-- BANGALORE pin -->
+        <circle cx="545" cy="210" r="6" fill="#c4813d" stroke="white" stroke-width="2.5"/>
+        <rect x="518" y="220" width="56" height="17" rx="4" fill="white" opacity="0.9"/>
+        <text x="546" y="232" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#2a2a2a">Bangalore 🇮🇳</text>
+
+        <!-- DUBAI pin -->
+        <circle cx="588" cy="145" r="8" fill="#c4813d" stroke="white" stroke-width="3"/>
+        <circle cx="588" cy="145" r="8" fill="none" stroke="#c4813d" stroke-width="2" opacity="0.45">
+          <animate attributeName="r" values="8;20;8" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.45;0;0.45" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <rect x="560" y="157" width="56" height="18" rx="5" fill="white" opacity="0.93"/>
+        <text x="588" y="171" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="600" fill="#2a2a2a">Dubai 🇦🇪</text>
+
+        <!-- TORONTO pin -->
+        <circle cx="173" cy="142" r="8" fill="#5a7d56" stroke="white" stroke-width="3"/>
+        <circle cx="173" cy="142" r="8" fill="none" stroke="#5a7d56" stroke-width="2" opacity="0.45">
+          <animate attributeName="r" values="8;20;8" dur="2.5s" begin="0.9s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.45;0;0.45" dur="2.5s" begin="0.9s" repeatCount="indefinite"/>
+        </circle>
+        <rect x="145" y="154" width="58" height="18" rx="5" fill="white" opacity="0.93"/>
+        <text x="174" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="600" fill="#2a2a2a">Toronto 🍁</text>
+
+        <!-- COSTA RICA -->
+        <circle cx="160" cy="208" r="5" fill="#8fad88" stroke="white" stroke-width="2.5"/>
+        <rect x="132" y="217" width="62" height="16" rx="4" fill="white" opacity="0.9"/>
+        <text x="163" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" font-weight="500" fill="#5a7d56">Costa Rica 🌿</text>
+
+        <!-- Legend -->
+        <rect x="800" y="358" width="188" height="52" rx="8" fill="white" opacity="0.86"/>
+        <circle cx="818" cy="373" r="4" fill="#5a7d56"/><text x="828" y="377" font-family="DM Sans,sans-serif" font-size="8.5" fill="#333">Home base</text>
+        <circle cx="818" cy="392" r="4" fill="#c4813d"/><text x="828" y="396" font-family="DM Sans,sans-serif" font-size="8.5" fill="#333">Previous stop</text>
+        <line x1="898" y1="373" x2="916" y2="373" stroke="#5a7d56" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="920" y="377" font-family="DM Sans,sans-serif" font-size="8.5" fill="#666">Main arc</text>
+      </svg>
+    </div>
+
+    <div class="travel-strip fade-in">
+      <span class="travel-pill">🇮🇳 Roots in Bangalore</span>
+      <span class="travel-pill">🇦🇪 Built career in Dubai</span>
+      <span class="travel-pill">🍁 Growing in Toronto</span>
+      <span class="travel-pill">🌿 Costa Rica (Academic)</span>
+      <span class="travel-pill">✈️ Always Exploring</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREATING IMPACT ── -->
+<section class="impact" id="impact">
+  <div class="fade-in">
+    <p class="section-eyebrow">Section 02</p>
+    <h2 class="section-title">Creating Impact</h2>
+  </div>
+  <div class="impact-grid fade-in">
+    <div class="impact-card wins">
+      <h3>Deal Experience &amp; Wins</h3>
+      <p>6+ years advising C-suite on cross-border M&A, translating complex financial and market data into clear value creation insights.</p>
+      <div class="win-item">
+        <div class="win-num">$100M+</div>
+        <div class="win-text">Average enterprise value across 10+ investment mandates prepared at Ardent Advisory</div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">5+</div>
+        <div class="win-text">Buy-side due diligence mandates delivered, focusing on variables that drive investment returns</div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">🥇</div>
+        <div class="win-text">VCIC — 1st place Rotman, 2nd place Nationals (Venture Capital Investment Competition)</div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">🥇</div>
+        <div class="win-text">RBC × Rotman Sustainable Finance Competition — 1st place</div>
+      </div>
+    </div>
+    <div class="impact-card forward">
+      <div class="badge">🌱 Forward Focus</div>
+      <h3>Future Thinking</h3>
+      <p>The most meaningful work sits at the intersection of capital and impact. My focus is on sustainable finance and building tools that democratise access to institutional-grade analysis.</p>
+      <ul class="fwd-list">
+        <li>Sustainable &amp; climate finance</li>
+        <li>Impact-driven investing</li>
+        <li>Fintech / AI-powered advisory tools</li>
+        <li>Democratising M&A analysis for mid-market</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIMPLIFIED ── -->
+<section class="simplified" id="simplified">
+  <div class="simplified-inner">
+    <div class="simplified-header fade-in">
+      <div>
+        <div class="simplified-eyebrow">🚀 Building in Progress</div>
+        <h3>Introducing <em>Simplified</em> —<br>an Analyst-in-a-Box for the mid-market.</h3>
+        <p class="simplified-desc">After years in transaction advisory, I kept seeing the same problem: boutique firms and independent advisors spending hours on financial modelling that should take minutes. Simplified is my answer — an enterprise-grade platform that transforms raw financial data into clean, actionable investment analysis, powered by AI.</p>
+      </div>
+      <div class="simplified-market">
+        <div class="market-num">$10.97B</div>
+        <div class="market-label">Investment Modelling Software market by 2035</div>
+        <div class="market-note">Growing at 9.6% CAGR, shifting aggressively toward tools offering fast, dynamic scenario modelling over rigid legacy software. Target users: boutique M&A firms, fractional CFOs, corporate development teams.</div>
+      </div>
+    </div>
+    <div class="arch-grid fade-in">
+      <div class="arch-card frontend">
+        <span class="arch-icon">🎨</span>
+        <h4>Zen-Finance UI</h4>
+        <p>Minimalist block-based design with a Traffic Light system (Green/Red/Neutral) that replaces dense data tables. Dual modes: Analyst (full inputs) and Presenter (clean client view).</p>
+        <div class="arch-features">
+          <span class="arch-feat">Analyst Mode &amp; Presenter Mode</span>
+          <span class="arch-feat">Interactive Tutor Layer</span>
+          <span class="arch-feat">White-label PDF exports</span>
+        </div>
+      </div>
+      <div class="arch-card middle">
+        <span class="arch-icon">⚙️</span>
+        <h4>Logic &amp; Math Engine</h4>
+        <p>Auto-ingests historical financials, cross-references macro APIs (industry growth, regional GDP), and instantly projects 5-year baseline forecasts feeding a live DCF — no manual entry.</p>
+        <div class="arch-features">
+          <span class="arch-feat">Real-time DCF calculations</span>
+          <span class="arch-feat">Normalised EBITDA &amp; trading comps</span>
+          <span class="arch-feat">Automated scenario modelling</span>
+        </div>
+      </div>
+      <div class="arch-card backend">
+        <span class="arch-icon">🤖</span>
+        <h4>AI &amp; Data Layer</h4>
+        <p>Integrated LLM reads math engine outputs and auto-drafts CIM narratives — Executive Summary, Investment Criteria, Industry Analysis, Risk Identification. Proprietary IP stays on-server.</p>
+        <div class="arch-features">
+          <span class="arch-feat">Claude / GPT narrative generation</span>
+          <span class="arch-feat">Secure private data uploads</span>
+          <span class="arch-feat">No Excel export (IP protected)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section class="skills" id="skills">
+  <div class="fade-in">
+    <p class="section-eyebrow">Section 04</p>
+    <h2 class="section-title">What I Bring</h2>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <h4>Finance &amp; M&A</h4>
+      <span class="skill-tag">Financial Modelling</span>
+      <span class="skill-tag">DCF &amp; Comps Valuation</span>
+      <span class="skill-tag">Transaction Advisory</span>
+      <span class="skill-tag">Due Diligence (QoE)</span>
+      <span class="skill-tag">Deal Execution</span>
+      <span class="skill-tag">Investment Memoranda</span>
+      <span class="skill-tag">ESG / Climate Finance</span>
+    </div>
+    <div class="skill-group">
+      <h4>Analytics &amp; Tools</h4>
+      <span class="skill-tag">Advanced Excel</span>
+      <span class="skill-tag">S&amp;P Capital IQ</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Budgeting &amp; Forecasting</span>
+      <span class="skill-tag">IRR / NPV Analysis</span>
+      <span class="skill-tag">Market Sizing</span>
+    </div>
+    <div class="skill-group">
+      <h4>Leadership &amp; Credentials</h4>
+      <span class="skill-tag">CA (ICAI)</span>
+      <span class="skill-tag">CFA Level III Candidate</span>
+      <span class="skill-tag">Stakeholder Management</span>
+      <span class="skill-tag">Cross-functional Teams</span>
+      <span class="skill-tag">Executive Communication</span>
+      <span class="skill-tag">Mentorship</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── OFF THE DESK ── -->
+<section class="desk" id="desk">
+  <div class="fade-in">
+    <p class="section-eyebrow">Section 05</p>
+    <h2 class="section-title">Off the Desk</h2>
+  </div>
+  <div class="desk-grid fade-in">
+    <div class="desk-card cooking">
+      <span style="font-size:1.7rem">🍳</span>
+      <h3>Shared Tables</h3>
+      <p>There's no better way to bring people together than over a meal you made yourself. My kitchen is where friendships deepen — the perfect paneer bhurji has a way of making people feel at home, no matter where they're from.</p>
+      <div>
+        <span class="dish-tag">Paneer Bhurji</span>
+        <span class="dish-tag">Dal Makhani</span>
+        <span class="dish-tag">Hosting Crew</span>
+        <span class="dish-tag">Indian Cuisine</span>
+      </div>
+    </div>
+    <div class="desk-card music">
+      <div>
+        <span style="font-size:1.7rem">🎛️</span>
+        <h3>Shared Rhythm</h3>
+        <p>Electronic music is a language — one that transcends small talk and creates real moments. The local scene in Toronto is where I find energy, community, and connection that's hard to put into words.</p>
+      </div>
+      <div class="music-visual">
+        <div class="bar" style="height:40%"></div><div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:55%"></div><div class="bar" style="height:85%"></div>
+        <div class="bar" style="height:45%"></div><div class="bar" style="height:65%"></div>
+        <div class="bar" style="height:30%"></div><div class="bar" style="height:75%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PUSHING LIMITS ── -->
+<section class="limits" id="limits">
+  <div class="fade-in">
+    <p class="section-eyebrow">Section 06</p>
+    <h2 class="section-title">Pushing Limits</h2>
+  </div>
+  <div class="limits-grid fade-in">
+    <div class="limit-card physical">
+      <span class="limit-icon">🥊</span>
+      <h3>The Physical Drive</h3>
+      <p>Discipline forged in the boxing ring and on the open road. Currently deep in training for the May marathon — every early morning run a reminder that the body is capable of far more than we ask of it.</p>
+      <div class="limit-stat">
+        <div class="stat-item"><span class="stat-num">42.2</span><span class="stat-label">km Race Distance</span></div>
+        <div class="stat-item"><span class="stat-num">5am</span><span class="stat-label">Training Starts</span></div>
+      </div>
+    </div>
+    <div class="limit-card mental">
+      <span class="limit-icon">📚</span>
+      <h3 style="color:white">The Mental Drive</h3>
+      <p style="color:rgba(255,255,255,0.58)">Lifelong learning is a practice, not a buzzword. Pursuing a Master of Finance at Rotman while working toward CFA Level III — constantly seeking perspectives that challenge how I see the world and the problems worth solving.</p>
+      <div class="limit-stat mental-stat">
+        <div class="stat-item"><span class="stat-num" style="color:var(--sage-light);font-size:1.2rem">Rotman</span><span class="stat-label" style="color:rgba(255,255,255,0.4)">MFin Journey</span></div>
+        <div class="stat-item"><span class="stat-num" style="color:var(--sage-light)">III</span><span class="stat-label" style="color:rgba(255,255,255,0.4)">CFA Level</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-inner fade-in">
+    <div class="contact-left">
+      <p class="section-eyebrow">Section 07</p>
+      <h2 class="section-title" style="color:white;margin-bottom:1rem">Let's build<br><em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--sage-light)">something great</em><br>together.</h2>
+      <p>Whether you want to talk strategy, M&A, sustainable finance, or swap marathon training tips — my inbox is always open.</p>
+      <div class="contact-links">
+        <a href="mailto:anjit.kumar@rotman.utoronto.ca" class="contact-link"><span>✉️</span><span>anjit.kumar@rotman.utoronto.ca</span></a>
+        <a href="https://linkedin.com/in/anjitk/" target="_blank" class="contact-link"><span>💼</span><span>linkedin.com/in/anjitk</span></a>
+        <a href="tel:6475685096" class="contact-link"><span>📞</span><span>(647) 568-5096</span></a>
+        <a href="#" class="contact-link"><span>📄</span><span>Download Resume</span></a>
+      </div>
+    </div>
+    <div class="contact-form-card">
+      <h3>Send a message</h3>
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Sarah Chen"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="hello@example.com"></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="What's on your mind?"></textarea></div>
+      <button class="form-submit" id="sendBtn">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-name">Anjit Kumar</div>
+    <div class="footer-tagline">M&A Advisor · Builder · Marathoner · Host</div>
+  </div>
+  <div class="footer-links">
+    <a href="#journey">Journey</a>
+    <a href="#impact">Work</a>
+    <a href="#simplified">Simplified</a>
+    <a href="#skills">Skills</a>
+    <a href="#desk">Life</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-ins
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Nav shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 20px rgba(0,0,0,0.07)' : 'none';
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Form send
+  document.getElementById('sendBtn').addEventListener('click', function() {
+    this.textContent = 'Message sent ✓';
+    this.style.background = 'var(--sage)';
+    this.disabled = true;
+  });
+</script>
+</body>
+</html>
